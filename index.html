@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAMUTA WORKBOARD</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>PAMUTA WORKBOARD</h1>
+
+  <div class="board">
+   <div class="column" data-status="RAW MATERIAL">
+    <h2>RAW MATERIAL</h2>
+   </div>
+   <div class="column" data-status="CNC1">
+    <h2>CNC 1</h2>
+   </div>
+   <div class="column" data-status="CNC2">
+    <h2>CNC 2</h2>
+   </div>
+   <div class="column" data-status="CNC3">
+    <h2>CNC 3</h2>
+   </div>
+   <div class="column" data-status="CNC LATE">
+    <h2>CNC LATE</h2>
+   </div>
+   <div class="column" data-status="OUT SOURCE">
+  <h2>OUT SOURCE</h2>
+</div>
+   <div class="column" data-status="CHECK">
+    <h2>CHECK</h2>
+   </div>
+   <div class="column" data-status="PACKING">
+    <h2>PACKING</h2>
+   </div>
+   <div class="column" data-status="DELIVERY">
+    <h2>DELIVERY</h2>
+   </div>
+   <div class="column" data-status="DONE">
+    <h2>DONE</h2>
+   </div>
+ </div>
+
+  <!-- ปุ่มโชว์/ซ่อนฟอร์ม -->
+  <div style="text-align:center; margin-top: 20px;">
+    <button id="addCardBtn">เพิ่มการ์ดใหม่</button>
+  </div>
+
+  <!-- ฟอร์มเพิ่มการ์ด -->
+  <div id="addCardForm" class="hidden" style="max-width: 500px; margin: 20px auto;">
+    <form id="cardForm">
+      <input type="text" id="productCode" placeholder="WORK ORDER" required />
+
+        
+      <select id="employeeName" required>
+  <option value="" disabled selected>-- เลือกชื่อพนักงาน --</option>
+  <option value="ธนกร">ธนกร</option>
+  <option value="มานพ">มานพ</option>
+  <option value="ชัยธวัช">ชัยธวัช</option>
+  <option value="ธิติวุฒิ">ธิติวุฒิ</option>
+  <option value="จักรพงษ์">จักรพงษ์</option>
+  <option value="เนตรนภา">เนตรนภา</option>
+  <option value="A1">A1</option>
+  <option value="A2">A2</option>
+</select>
+
+      
+      <select id="customerName" required>
+  <option value="" disabled selected>-- เลือกชื่อลูกค้า --</option>
+  <option value="ARB-Massproducts">ARB-Massproducts</option>
+  <option value="ARB-Support EN./QA">ARB-Support EN./QA</option>
+  <option value="ARB-Tooling">ARB-Tooling</option>
+  <option value="ARB-Sample new model">ARB-Sample new model</option>
+  <option value="UMETOKU-Collar">UMETOKU-Collar</option>
+  <option value="UMETOKU-GW.">UMETOKU-GW.</option>
+  <option value="UMETOKU-BP.">UMETOKU-BP.</option>
+  <option value="UMETOKU-DMK.">UMETOKU-DMK.</option>
+  <option value="UMETOKU-SANGO.">UMETOKU-SANGO.</option>
+  <option value="UMETOKU-Other">UMETOKU-Other</option>
+  <option value="YOROZU ENGINEERING SYSTEMS">YOROZU ENGINEERING SYSTEMS</option>
+  <option value="INTERTOOL TECHNOLOGIES CO.,LTD">INTERTOOL TECHNOLOGIES CO., LTD</option>
+  <option value="ห้างหุ้นส่วนจำกัด เอ็น.ซี.ที. เอนจิเนียริ่ง">ห้างหุ้นส่วนจำกัด เอ็น.ซี.ที. เอนจิเนียริ่ง</option>
+  <option value="Y.T.T MOLD AND DIE INDUSTRY CO.,LTD">Y.T.T MOLD AND DIE INDUSTRY CO.,LTD</option>
+  <option value="บริษัท ไดโด ดีเอ็มเอส (ไทยแลนด์) จำกัด">บริษัท ไดโด ดีเอ็มเอส (ไทยแลนด์) จำกัด</option>
+  <option value="บริษัท ชิน อี เมลทัล จำกัด">บริษัท ชิน อี เมลทัล จำกัด</option>
+  <option value="ABSOLUTE POLYMER CO.,LTD">ABSOLUTE POLYMER CO.,LTD</option>
+  <option value="UNITECH MANUFACTURING (THAILAND) CO.,LTD.">UNITECH MANUFACTURING (THAILAND) CO.,LTD.</option>
+  <option value="B1">B1</option>
+  <option value="B2">B2</option>
+  <option value="B3">B3</option>
+  <option value="B4">B4</option>
+  <option value="B5">B5</option>
+</select>
+
+      <input type="text" id="productName" placeholder="PART NUMBER" />
+      <input type="text" id="productNumber" placeholder="QUANTITY" />
+      <input type="date" id="orderDate" placeholder="ORDER DATE" />
+      <input type="date" id="dueDate" placeholder="DELIVERY DATE" />
+      <label for="status">สถานะ:</label>
+      <select id="status" name="status" required>
+  <option value="RAW MATERIAL">RAW MATERIAL</option>
+  <option value="CNC1">CNC1</option>
+  <option value="CNC2">CNC2</option>
+  <option value="CNC3">CNC3</option>
+  <option value="CNC LATE">CNC LATE</option>
+  <option value="OUT SOURCE">OUT SOURCE</option>
+  <option value="CHECK">CHECK</option>
+  <option value="PACKING">PACKING</option>
+  <option value="DELIVERY">DELIVERY</option>
+  <option value="DONE">DONE</option>
+      </select>
+
+      <input type="text" id="remarks" placeholder="NOTE" />
+      <button type="submit">เพิ่มการ์ด</button>
+    </form>
+  </div>
+
+<script type="module" src="script.js"></script>
