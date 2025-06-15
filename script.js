@@ -1,3 +1,4 @@
+//ล่าสุดjs//
 // === Firebase SDK ===
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import {
@@ -47,7 +48,8 @@ cards.forEach(card => card.remove());
       
       card.setAttribute("draggable", "true");
       card.setAttribute("data-firestore-id", doc.id);
-     card.id = `card-${docId}`; // ใช้ id สำหรับ drop
+     card.id = "card-" + docId;
+ // ใช้ id สำหรับ drop
       card.dataset.docId = docId; // ใช้กับ updateDoc ตอนลากแล้วปล่อย
 
       let deadlineClass = "";
@@ -87,6 +89,7 @@ cards.forEach(card => card.remove());
       `;
 
     const targetColumn = document.querySelector(`.column[data-status="${cardData.status}"]`);
+
 if (targetColumn) {
   targetColumn.appendChild(card);
 } else {
@@ -194,10 +197,19 @@ if (deleteBtn) {
           await updateDoc(cardRef, { remarks: updatedNote });
           console.log("✅ บันทึก Note เรียบร้อย:", updatedNote);
           const formData = new URLSearchParams();
-          formData.append("productCode", card.querySelector("p").innerText.split(":")[1].trim());
-          formData.append("remarks", updatedNote);
+        formData.append("productCode", draggedCard.querySelector(".card-main p:nth-child(1)").innerText.split(":")[1].trim());
+formData.append("employeeName", draggedCard.querySelector(".card-main p:nth-child(2)").innerText.split(":")[1].trim());
+formData.append("customerName", draggedCard.querySelector(".card-details p:nth-child(1)").innerText.split(":")[1].trim());
+formData.append("productName", draggedCard.querySelector(".card-details p:nth-child(2)").innerText.split(":")[1].trim());
+formData.append("productNumber", draggedCard.querySelector(".card-details p:nth-child(3)").innerText.split(":")[1].trim());
+formData.append("orderDate", draggedCard.querySelector(".card-details p:nth-child(4)").innerText.split(":")[1].trim());
+formData.append("dueDate", draggedCard.querySelector(".card-details p:nth-child(5)").innerText.split(":")[1].trim());
+formData.append("remarks", draggedCard.querySelector(".editable-note").innerText.trim());
+formData.append("elapsedTime", draggedCard.querySelector(".elapsed-time").innerText.trim());
+formData.append("status", newStatus); // newStatus คือสถานะใหม่ที่เราตั้งตอนลากการ์ด
 
-     fetch("https://script.google.com/macros/s/AKfycbzZOMpmu-lJHXCeyNuhAqXBamj9_EVdoQtt2fgYpdS0pAfbyGbh6nPivZqZGaj4xw7ohw/exec", {
+
+     fetch("https://script.google.com/macros/s/AKfycbzbcExHmxFgXI3bMsoSl-3rdd3LNgjy_px8LKUTt9xnf8QpyHtEdCVkTTqZAoDWTeUUzw/exec", {
          method: "POST",
          headers: {
          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
@@ -225,6 +237,7 @@ if (deleteBtn) {
     const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
     const seconds = String(totalSeconds % 60).padStart(2, "0");
    return `${hours}:${minutes}:${seconds}`;
+
   }
 }
 
@@ -304,10 +317,18 @@ loadCardsFromFirestore().then(() => {
         await updateDoc(cardRef, { status: newStatus });
         console.log("✅ อัปเดตสถานะใน Firestore เป็น", newStatus);
         const formData = new URLSearchParams();
-    formData.append("productCode", draggedCard.querySelector("p").innerText.split(":")[1].trim());
-    formData.append("status", newStatus);
+    formData.append("productCode", draggedCard.querySelector(".card-main p:nth-child(1)").innerText.split(":")[1].trim());
+formData.append("employeeName", draggedCard.querySelector(".card-main p:nth-child(2)").innerText.split(":")[1].trim());
+formData.append("customerName", draggedCard.querySelector(".card-details p:nth-child(1)").innerText.split(":")[1].trim());
+formData.append("productName", draggedCard.querySelector(".card-details p:nth-child(2)").innerText.split(":")[1].trim());
+formData.append("productNumber", draggedCard.querySelector(".card-details p:nth-child(3)").innerText.split(":")[1].trim());
+formData.append("orderDate", draggedCard.querySelector(".card-details p:nth-child(4)").innerText.split(":")[1].trim());
+formData.append("dueDate", draggedCard.querySelector(".card-details p:nth-child(5)").innerText.split(":")[1].trim());
+formData.append("remarks", draggedCard.querySelector(".editable-note").innerText.trim());
+formData.append("elapsedTime", draggedCard.querySelector(".elapsed-time").innerText.trim());
+formData.append("status", newStatus); // newStatus คือสถานะใหม่ที่เราตั้งตอนลากการ์ด
 
-    fetch("https://script.google.com/macros/s/AKfycbzZOMpmu-lJHXCeyNuhAqXBamj9_EVdoQtt2fgYpdS0pAfbyGbh6nPivZqZGaj4xw7ohw/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbzbcExHmxFgXI3bMsoSl-3rdd3LNgjy_px8LKUTt9xnf8QpyHtEdCVkTTqZAoDWTeUUzw/exec", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
@@ -381,7 +402,9 @@ formData.append('remarks', cardData.remarks);
 formData.append('elapsedTime', cardData.elapsedTime);
 formData.append('status', cardData.status || "");
 
-fetch("https://script.google.com/macros/s/AKfycbzZOMpmu-lJHXCeyNuhAqXBamj9_EVdoQtt2fgYpdS0pAfbyGbh6nPivZqZGaj4xw7ohw/exec", {
+console.log("ส่ง formData: ", Object.fromEntries(formData.entries()));
+
+fetch("https://script.google.com/macros/s/AKfycbzbcExHmxFgXI3bMsoSl-3rdd3LNgjy_px8LKUTt9xnf8QpyHtEdCVkTTqZAoDWTeUUzw/exec", {
   method: "POST",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
