@@ -1,4 +1,4 @@
-//ล่าสุดjs//
+
 // === Firebase SDK ===
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 import {
